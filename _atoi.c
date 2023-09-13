@@ -2,17 +2,14 @@
 
 
 
+
+
 /**
- * is_delim - checks if character is a delimeter
- * @c: the char to check
- * @delim: the delimeter string
- * Return: Returns (1) if true, otherwise (0) if false
+ * is_interactive - check whether shell is active or not
+ * Return: Returns (1) if active  mode otherwise (0) inactive
  */
-int is_delim(char c, char *delim)
+int is_interactive(void)
 {
-	while (*delim)
-		if (*delim++ == c)
-			return (1);
-	return (0);
+	return (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO));
 }
 

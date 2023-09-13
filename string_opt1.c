@@ -2,105 +2,112 @@
 
 
 
-
 /**
- * str_split1 - splits a string into words.
- * @str: the input string
- * @delim: the delimeter string
- * Return: Returns a pointer to an array of strings, or NULL on failure
+ * _strlen - returns the length of a string
+ * @str: string length to check
+ * Return: Returns length of string
  */
-char **str_split1(char *str, char *delim)
+size_t _strlen(const char *str)
 {
-	int i, j, k, l;
-	int wordcounts = 0;
-	char **s;
+	size_t length = 0;
 
-	if (str == NULL || str[0] == '\0')
-		return (NULL);
-	if (!delim)
-		delim = " ";
-	for (i = 0; str[i] != '\0'; i++)
-	{
-		if (!is_delim(str[i], delim) &&
-			(is_delim(str[i + 1], delim) || str[i + 1] == '\0'))
-			wordcounts++;
-	}
-	if (wordcounts == 0)
-		return (NULL);
-	s = (char **)malloc((wordcounts + 1) * sizeof(char *));
-	if (!s)
-		return (NULL);
-	for (i = 0, j = 0; j < wordcounts; j++)
-	{
-		while (is_delim(str[i], delim))
-			i++;
-		k = 0;
-		while (!is_delim(str[i + k], delim) && str[i + k] != '\0')
-			k++;
-		s[j] = (char *)malloc((k + 1) * sizeof(char));
-		if (!s[j])
-		{
-			for (k = 0; k < j; k++)
-			{
-				free(s[k]);
-			}
-			free(s);
-			return (NULL);
-		}
-		for (l = 0; l < k; l++)
-			s[j][l] = str[i++];
-		s[j][l] = '\0';
-	}
-	s[j] = NULL;
-	return (s);
+	while (str[length] != '\0')
+		length++;
+	return (length);
 }
 
 
 /**
- * str_split2 - splits a string into words
- * @str: the input string
- * @delim: the delimeter
- * Return: Returns a pointer to an array of strings, or NULL on failure
+ * _strdup - duplicates a string
+ * @str: string to duplicate
+ * Return: Returns a pointer to the duplicated string
  */
-char **str_split2(char *str, char delim)
+char *_strdup(const char *str)
 {
-	int i, j, k, m;
-	int wordcounts = 0;
-	char **s;
+	int i, length;
+	char *rtn;
 
-	if (str == NULL || str[0] == '\0')
+	if (str == NULL)
 		return (NULL);
-	for (i = 0; str[i] != '\0'; i++)
-		if ((str[i] != delim && str[i + 1] == delim) ||
-				(str[i] != delim && !str[i + 1]) ||
-				str[i + 1] == delim)
-			wordcounts++;
-	if (wordcounts == 0)
-		return (NULL);
-	s = (char **)malloc((wordcounts + 1) * sizeof(char *));
-	if (!s)
-		return (NULL);
-	for (i = 0, j = 0; j < wordcounts; j++)
+
+	length = 0;
+	rtn = NULL;
+
+	while (str[length] != '\0')
+		length++;
+	rtn = (char *)malloc(sizeof(char) * (length + 1));
+	if (rtn == NULL)
 	{
-		while (str[i] == delim && str[i] != delim)
-			i++;
-		k = 0;
-		while (str[i + k] != delim && str[i + k] && str[i + k] != delim)
-			k++;
-		s[j] = (char *)malloc((k + 1) * sizeof(char));
-		if (!s[j])
-		{
-			for (k = 0; k < j; k++)
-			{
-				free(s[k]);
-			}
-			free(s);
-			return (NULL);
-		}
-		for (m = 0; m < k; m++)
-			s[j][m] = str[i++];
-		s[j][m] = 0;
+		perror("memory allocation failed");
+		return (NULL);
 	}
-	s[j] = NULL;
-	return (s);
+	for (i = 0; i < length; i++)
+		rtn[i] = str[length - i - 1];
+	rtn[length] = '\0';
+	free(rtn);
+	return (rtn);
+}
+
+
+/**
+ **_strncpy - copies a string
+ *@dest: the destination string to be copied to
+ *@src: the source string
+ *@num: the amount of characters to be copied
+ *Return: the concatenated string
+ */
+char *_strncpy(char *dest, const char *src, size_t num)
+{
+	char *d = dest;
+
+	while (num > 0 && *src)
+	{
+		*d++ = *src++;
+		num--;
+	}
+	while (num > 0)
+	{
+		*d++ = '\0';
+		num--;
+	}
+	return (dest);
+}
+
+
+/**
+ **_strncmp - compare number of string
+ *@str1: the str1 string to be compare
+ *@str2: string compare
+ *@num: the amount of characters to be compare
+ *Return: Returns string
+ */
+int _strncmp(const char *str1, const char *str2, size_t num)
+{
+	size_t i;
+
+	for (i = 0; i < num; i++)
+	{
+		if (str1[i] != str2[i])
+			return ((int)(str1[i] - str2[i]));
+		if (str1[i] == '\0')
+			break;
+	}
+	return (0);
+}
+
+
+/**
+ * _strchr - locates a character in a string
+ * @str: the string to be parsed
+ * @c: the caharacter to look for
+ * Return: Returns str a point the memory area
+ */
+char *_strchr(char *str, char c)
+{
+	do {
+		if (*str == c)
+			return (str);
+	}
+	while (*str++ != '\0');
+	return (NULL);
 }

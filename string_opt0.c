@@ -1,6 +1,7 @@
 #include "main.h"
 
 
+
 /**
  * _putchar - writes the character c to stdout
  * @c: the character to print
@@ -54,14 +55,38 @@ char *_strcpy(char *dest, const char *src)
  * @dest: destination file
  * Return: Returns a pointer to destination file
  */
-char *_strcat(char *dest, char *src)
+char *_strcat(char *dest, const char *src)
 {
-	char *rtn = dest;
+	size_t dest_len = _strlen(dest);
+	size_t i = 0;
 
-	while (*dest)
-		dest++;
-	while (*src)
-		*dest++ = *src++;
-	*dest = *src;
-	return (rtn);
+	while (src[i] != '\0')
+	{
+		dest[dest_len + i] = src[i];
+		i++;
+	}
+	dest[dest_len + i] = '\0';
+	return (dest);
+}
+
+
+/**
+ * _strcmp - performs lexicographic comparison of two strings
+ * @str1: string compare from
+ * @str2: string compare to
+ * Return: Returna negative if str1 < str2, otherwise positive
+ */
+int _strcmp(char *str1, char *str2)
+{
+	while (*str1 && *str2)
+	{
+		if (*str1 != *str2)
+			return (*str1 - *str2);
+		str1++;
+		str2++;
+	}
+	if (*str1 == *str2)
+		return (0);
+	else
+		return (*str1 < *str2 ? -1 : 1);
 }

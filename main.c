@@ -17,19 +17,19 @@ int main(void)
 
 	if (result1)
 	{
-		printf("Result 1:\n");
 		_printstr("Result 1: \n");
 
 		for (i = 0; result1[i] != NULL; i++)
 			printf("%s\n", result1[i]);
+			_printstr("\n");
 	}
 	if (result2)
 	{
-		printf("Result 2:\n");
 		_printstr("Result 2: \n");
 
 		for (i = 0; result2[i] != NULL; i++)
 			printf("%s\n", result2[i]);
+			_printstr("\n");
 	}
 	free_str_array(result1);
 	free_str_array(result2);
