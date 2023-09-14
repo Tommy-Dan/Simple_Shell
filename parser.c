@@ -63,7 +63,7 @@ char *starts_with(const char *haystack, const char *needle)
 char *find_path(const char *pathstr, const char *cmd)
 {
 	int i = 0, cp = 0;
-	char *path = NULL;
+	/*char *path = NULL;*/
 
 	if (!pathstr || !cmd)
 		return (NULL);
@@ -74,6 +74,7 @@ char *find_path(const char *pathstr, const char *cmd)
 	{
 		if (!pathstr[i] || pathstr[i] == ':')
 		{
+			char *path;
 			path = (char *)malloc(i - cp + _strlen(cmd) + 2);
 			if (!path)
 			{
@@ -100,6 +101,7 @@ char *find_path(const char *pathstr, const char *cmd)
 		}
 		i++;
 	}
+	free(path);
 	return (NULL);
 }
 
