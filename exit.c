@@ -5,14 +5,16 @@
  * @args: an array of pointers.
  */
 
-void free_array(char **args) {
-  int i;
+void free_array(char **args)
+{
+	int i;
 
-  if (args) {
-    for (i = 0; args[i]; i++)
-      free(args[i]);
-    free(args);
-  }
+	if (args)
+	{
+		for (i = 0; args[i]; i++)
+			free(args[i]);
+		free(args);
+	}
 }
 
 /**
@@ -23,22 +25,26 @@ void free_array(char **args) {
  *Return: the exit status
  */
 
-int ExitCommand(char **cmd, char *line, int status) {
-  int exitStatus, i;
+int ExitCommand(char **cmd, char *line, int status)
+{
+	int exitStatus, i;
 
-  if (cmd[1] == NULL) {
-    free_array(cmd);
-    free(line);
-    exit(status);
-  }
-  for (i = 0; cmd[1][i]; i++) {
-    if (isdigit(cmd[1][i]) == 0) {
-      free_array(cmd);
-      return (1);
-    }
-  }
-  exitStatus = _atoi(cmd[1]);
-  free_array(cmd);
-  free(line);
-  exit(exitStatus);
+	if (cmd[1] == NULL)
+	{
+		free_array(cmd);
+		free(line);
+		exit(status);
+	}
+	for (i = 0; cmd[1][i]; i++)
+	{
+		if (isdigit(cmd[1][i]) == 0)
+		{
+			free_array(cmd);
+			return (1);
+		}
+	}
+	exitStatus = _atoi(cmd[1]);
+	free_array(cmd);
+	free(line);
+	exit(exitStatus);
 }
