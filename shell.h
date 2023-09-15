@@ -20,7 +20,7 @@ extern char **environ;
 
 
 /* == string operations == */
-void printStr(const char *);
+void _printstr(const char *);
 int _putchar(char c);
 int _strlen(char *s);
 int _strncmp(const char *s1, const char *s2, size_t n);
