@@ -16,6 +16,7 @@ int handleEnv(char **command)
 	while (*env != NULL)
 	{
 		_printstr(*env);
+		_putchar('\n');
 		env++;
 	}
 	_putchar('\n');
