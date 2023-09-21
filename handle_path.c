@@ -19,7 +19,6 @@ int handleEnv(char **command)
 		_putchar('\n');
 		env++;
 	}
-	_putchar('\n');
 	return (0);
 }
 
